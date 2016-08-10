@@ -1,0 +1,36 @@
+<% content_for(:title) do %>
+  <%= @restaurant.name %> is on Rails Yelp MVP
+<% end %>
+
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <h1><%= @restaurant.name %></h1>
+        <h4><%= @restaurant.category %></h4>
+        <address><%= @restaurant.address %></address>
+        <p><%= @restaurant.phone_number %></p>
+
+        <%= link_to "home", restaurants_path, class: "btn btn-primary" %>
+        <%= link_to "Write a review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% unless @restaurant.reviews.empty? %>
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <% @restaurant.reviews.each do |review| %>
+          <div class="card-review">
+            <p class="rating">Note: <%= review.rating %></p>
+            <blockquote><%= review.content %></blockquote>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
